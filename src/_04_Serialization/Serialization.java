@@ -35,6 +35,7 @@ public class Serialization {
 		assertEquals(age, loadedData.age);
 	}
 
+
 	/*
 	 * One simple way to save a serializable object to a file is using a FileOutputStream
 	 * and ObjectOutputStream.
