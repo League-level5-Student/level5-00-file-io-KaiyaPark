@@ -6,11 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /*
  * Complete this class so that it can be serialized.
  */
-public class SaveData {
+public class SaveData implements Serializable {
 	public final String name;
 	public final int age;
 
@@ -18,8 +19,9 @@ public class SaveData {
 		this.name = name;
 		this.age = age;
 	}
+
 	private static void save(SaveData data) {
-		try (FileOutputStream fos = new FileOutputStream(new File("dataFile")); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("dataFile")))) {
 			oos.writeObject(data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -27,7 +29,7 @@ public class SaveData {
 	}
 
 	private static SaveData load() {
-		try (FileInputStream fis = new FileInputStream(new File("dataFile")); ObjectInputStream ois = new ObjectInputStream(fis)) {
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("dataFile")))) {
 			return (SaveData) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
